@@ -1,3 +1,5 @@
+DTC_INCLUDE += $(srctree)/../sm8650-modules/qcom/opensource/audio-kernel/include
+DTC_INCLUDE += $(srctree)/../sm8650-modules/qcom/opensource/audio-kernel/include
 ifeq ($(CONFIG_ARCH_KALAMA), y)
 dtbo-y += kalama-audio.dtbo \
                  kalama-audio-cdp.dtbo \
@@ -14,6 +16,10 @@ dtbo-y += kalama-audio.dtbo \
 endif
 
 ifeq ($(CONFIG_ARCH_PINEAPPLE), y)
+ifneq ($(CONFIG_MI_HARDWARE_ID),)
+dtbo-y += pineapple-audio.dtbo \
+                 zorn-audio-mtp.dtbo
+else
 dtbo-y += pineapple-audio.dtbo \
                  pineapple-audio-cdp.dtbo \
                  pineapple-audio-wsa883x-cdp.dtbo \
@@ -41,6 +47,7 @@ dtbo-y += pineapple-audio.dtbo \
                  cliffs7-audio-mtp-wcd9395.dtbo \
                  cliffs-audio-atp.dtbo \
                  cliffs7-audio-atp.dtbo
+endif
 endif
 
 ifeq ($(CONFIG_ARCH_VOLCANO), y)

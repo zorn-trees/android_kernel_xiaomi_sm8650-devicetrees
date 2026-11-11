@@ -12,6 +12,7 @@ add-overlays = $(foreach o,$1,$(foreach b,$2,$(eval $(basename $b)-$(basename $o
 #
 
 ifneq ($(CONFIG_ARCH_QTI_VM), y)
+ifeq ($(CONFIG_MI_HARDWARE_ID),)
 
 PINEAPPLE_BASE_DTB += pineapple.dtb pineapple-v2.dtb
 PINEAPPLE_APQ_BASE_DTB += pineapplep.dtb pineapplep-v2.dtb
@@ -28,8 +29,7 @@ PINEAPPLE_BOARDS += \
 		 pineapplep-hdk-overlay.dtbo \
 		 pineapple-dpm-overlay.dtbo \
 		 pineapplep-aim500-overlay.dtbo \
-		 pineapplep-aim500-v2-overlay.dtbo \
-		 zorn-sm8650-overlay.dtbo
+		 pineapplep-aim500-v2-overlay.dtbo
 
 NOAPQ_PINEAPPLE_BOARDS += \
 		 pineapple-rumi-overlay.dtbo
@@ -38,7 +38,6 @@ pineapple-dtb-$(CONFIG_ARCH_PINEAPPLE) += \
 	$(call add-overlays, $(PINEAPPLE_BOARDS) $(NOAPQ_PINEAPPLE_BOARDS),$(PINEAPPLE_BASE_DTB))\
 	$(call add-overlays, $(PINEAPPLE_BOARDS) $(APQ_PINEAPPLE_BOARDS),$(PINEAPPLE_APQ_BASE_DTB))
 pineapple-overlays-dtb-$(CONFIG_ARCH_PINEAPPLE) += $(PINEAPPLE_BOARDS) $(NOAPQ_PINEAPPLE_BOARDS) $(PINEAPPLE_BASE_DTB) $(PINEAPPLE_APQ_BASE_DTB)
-zorn-overlays-dtb-$(CONFIG_ARCH_PINEAPPLE) += $(PINEAPPLE_BOARDS) $(NOAPQ_PINEAPPLE_BOARDS) $(PINEAPPLE_BASE_DTB) $(PINEAPPLE_APQ_BASE_DTB)
 
 CLIFFS_BASE_DTB += cliffs.dtb cliffs7.dtb
 CLIFFS_APQ_BASE_DTB += cliffsp.dtb cliffs7p.dtb
@@ -101,7 +100,17 @@ pineapple-dtb-$(CONFIG_ARCH_VOLCANO) += \
 pineapple-overlays-dtb-$(CONFIG_ARCH_VOLCANO) += $(VOLCANO_BOARDS) $(NOAPQ_VOLCANO_BOARDS) $(VOLCANO_BASE_DTB) $(VOLCANO_APQ_BASE_DTB)
 
 dtb-y += $(pineapple-dtb-y)
-dtb-y += $(zorn-dtb-y)
+else
+PINEAPPLE_BASE_DTB += pineapple.dtb pineapple-v2.dtb
+PINEAPPLE_APQ_BASE_DTB += pineapplep.dtb pineapplep-v2.dtb
+
+XIAOMI_PINEAPPLE_BOARDS += \
+		 zorn-sm8650-overlay.dtbo
+
+zorn-overlays-dtb-$(CONFIG_ARCH_PINEAPPLE) += $(XIAOMI_PINEAPPLE_BOARDS) $(PINEAPPLE_BASE_DTB) $(PINEAPPLE_APQ_BASE_DTB)
+
+dtb-y += $(zorn-overlays-dtb-y)
+endif
 
 KALAMA_BASE_DTB += kalama.dtb kalama-v2.dtb
 KALAMA_APQ_BASE_DTB += kalamap.dtb kalamap-v2.dtb
@@ -555,4 +564,6 @@ dtb-y += $(sdmsteppeauto-dtb-y)
 
 always-y        := $(dtb-y)
 subdir-y        := $(dts-dirs)
+subdir-y        += audio bt camera data display dsp eSE eva fingerprint graphics mm mmrm mm-sys nfc synx video wlan
+subdir-y        += audio bt camera data display dsp eSE eva fingerprint graphics mm mmrm mm-sys nfc synx video wlan
 clean-files     := *.dtb *.dtbo
