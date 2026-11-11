@@ -1031,6 +1031,7 @@
 			compatible = "qcom,msm-cam-smmu-cb";
 			iommus = <&apps_smmu 0x800 0x20>;
 			qcom,iommu-dma-addr-pool = <0x0 0x100000 0xf 0xffe00000>;
+			qcom,iommu-faults = "stall-disable", "non-fatal";
 			dma-coherent;
 			cam-smmu-label = "ife", "sfe";
 			multiple-client-devices;
@@ -1054,6 +1055,7 @@
 			compatible = "qcom,msm-cam-smmu-cb";
 			iommus = <&apps_smmu 0x18A0 0x0000>;
 			cam-smmu-label = "jpeg";
+			qcom,iommu-faults = "stall-disable", "non-fatal";
 			qcom,iommu-dma-addr-pool = <0x0 0x100000 0x0 0xffe00000>;
 			dma-coherent;
 			jpeg_iova_mem_map: iova-mem-map {
@@ -1080,6 +1082,7 @@
 				<&apps_smmu 0x1840 0x00>,
 				<&apps_smmu 0x1880 0x00>;
 			cam-smmu-label = "icp";
+			qcom,iommu-faults = "stall-disable","non-fatal";
 			qcom,iommu-dma-addr-pool = <0x0 0xf9500000 0xf 0x06a00000>;
 			dma-coherent;
 			icp_iova_mem_map: iova-mem-map {
@@ -1188,6 +1191,7 @@
 			compatible = "qcom,msm-cam-smmu-cb";
 			iommus = <&apps_smmu 0x1860 0x00>;
 			cam-smmu-label = "rt-cdm";
+			qcom,iommu-faults = "stall-disable", "non-fatal";
 			qcom,iommu-dma-addr-pool = <0x0 0x100000 0x0 0xffe00000>;
 			dma-coherent;
 			multiple-client-devices;
@@ -1346,7 +1350,6 @@
 			"tpg13", "tpg14", "tpg15";
 		sys-cache-names = "small-1", "large-1";
 		sys-cache-uids = <34 38>;
-		enable-secure-qos-update;
 		enable-cam-drv = <(CAM_DDR_DRV | CAM_CLK_DRV)>;
 		rt-wr-priority-min = <4>;
 		rt-wr-priority-max = <5>;
@@ -2751,7 +2754,7 @@
 
 	cam_bps: qcom,bps@ac2c000 {
 		cell-index = <0>;
-		compatible = "qcom,cam-bps880";
+		compatible = "qcom,cam-bps680";
 		reg = <0xac2c000 0xb000>;
 		reg-names = "bps_top";
 		reg-cam-base = <0x2c000>;
