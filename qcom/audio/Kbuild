@@ -16,8 +16,8 @@ endif
 
 ifeq ($(CONFIG_ARCH_PINEAPPLE), y)
 ifneq ($(CONFIG_MI_HARDWARE_ID),)
-dtbo-y += pineapple-audio.dtbo \
-                 zorn-audio-mtp.dtbo
+dtbo-y += pineapple-audio.dtbo
+dtbo-$(CONFIG_ZORN_DTB) += zorn-audio-mtp.dtbo
 else
 dtbo-y += pineapple-audio.dtbo \
                  pineapple-audio-cdp.dtbo \

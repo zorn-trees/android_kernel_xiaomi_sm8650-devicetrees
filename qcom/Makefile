@@ -104,12 +104,11 @@ else
 PINEAPPLE_BASE_DTB += pineapple.dtb pineapple-v2.dtb
 PINEAPPLE_APQ_BASE_DTB += pineapplep.dtb pineapplep-v2.dtb
 
-XIAOMI_PINEAPPLE_BOARDS += \
-		 zorn-sm8650-overlay.dtbo
+XIAOMI_PINEAPPLE_BOARDS-$(CONFIG_ZORN_DTB) += zorn-sm8650-overlay.dtbo
 
-zorn-overlays-dtb-$(CONFIG_ARCH_PINEAPPLE) += $(XIAOMI_PINEAPPLE_BOARDS) $(PINEAPPLE_BASE_DTB) $(PINEAPPLE_APQ_BASE_DTB)
+xiaomi-pineapple-overlays-dtb-$(CONFIG_ARCH_PINEAPPLE) += $(XIAOMI_PINEAPPLE_BOARDS-y) $(PINEAPPLE_BASE_DTB) $(PINEAPPLE_APQ_BASE_DTB)
 
-dtb-y += $(zorn-overlays-dtb-y)
+dtb-y += $(xiaomi-pineapple-overlays-dtb-y)
 endif
 
 KALAMA_BASE_DTB += kalama.dtb kalama-v2.dtb
