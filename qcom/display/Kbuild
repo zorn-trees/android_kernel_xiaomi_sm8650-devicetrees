@@ -1,4 +1,8 @@
 ifneq ($(CONFIG_ARCH_QTI_VM), y)
+ifneq ($(CONFIG_MI_HARDWARE_ID),)
+dtbo-$(CONFIG_ARCH_PINEAPPLE) += display/pineapple-sde.dtbo \
+		display/zorn-sde-display-mtp-overlay.dtbo
+else
 dtbo-$(CONFIG_ARCH_PINEAPPLE) += display/pineapple-sde.dtbo \
 		display/aurora-sde-display-mtp-overlay.dtbo \
 		display/shennong-sde-display-mtp-overlay.dtbo \
@@ -17,6 +21,7 @@ dtbo-$(CONFIG_ARCH_PINEAPPLE) += display/pineapple-sde.dtbo \
 		display/pineapple-sde-display-cdp-nfc-overlay.dtbo \
 		display/pineapple-sde-display-mtp-nfc-overlay.dtbo \
 		display/pineapple-sde-display-atp-overlay.dtbo
+endif
 else
 dtbo-$(CONFIG_ARCH_PINEAPPLE) += display/trustedvm-pineapple-sde-display-mtp-overlay.dtbo \
 		  display/trustedvm-pineapple-sde-display-cdp-overlay.dtbo \

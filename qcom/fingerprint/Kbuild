@@ -1,5 +1,7 @@
 ifeq ($(CONFIG_ARCH_PINEAPPLE), y)
+ifeq ($(CONFIG_MI_HARDWARE_ID),)
 dtbo-y += pineapple-fingerprint.dtbo
+endif
 endif
 
 ifeq ($(CONFIG_ARCH_SUN), y)
