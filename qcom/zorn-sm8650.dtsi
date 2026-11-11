@@ -3,6 +3,8 @@
   And public attribution of xiaomi platforms(like N11U and so and)
 */
 #define ZORN_REGULATOR_OCP
+#include <dt-bindings/clock/qcom,rpmh.h>
+
 #include "zorn-pinctrl.dtsi"
 #include "xiaomi-sm8650-common.dtsi"
 
@@ -781,13 +783,13 @@
 &pm8550b_eusb2_repeater {
 	qcom,param-override-seq-host =
 		<0x00 0x50
-		0x0e 0x51
+		0x08 0x51
 		0x03 0x52
 		0x07 0x53
 		0x03 0x54
-		0x02 0x55
+		0x00 0x55
 		0x01 0x56
-		0x05 0x57
+		0x00 0x57
 		0x02 0x58
 		0x02 0x59
 		0x01 0x5a
@@ -815,4 +817,55 @@
 &battery_charger {
  	qcom,shutdown-voltage = <2900>;
  	mi,support-shutdown-delay;
+};
+
+&pm8550b_haptics {
+	qcom,vmax-mv = <1400>;
+	qcom,lra-period-us = <5714>;
+	qcom,f0-vmax-mv = <2100>;
+	qcom,custom_vmax_mv = <8500>;
+	qcom,lra-f0-min = <160>;
+	qcom,lra-f0-max = <180>;
+	qcom,lra-f0-default = <170>;
+	qcom,lra-f0-cal-count = <570>;
+	qcom,lra_calibration_vmax_hdrm_mv = <1200>;
+	qcom,lra_temp = <1>;
+	qcom,mi_comp_lra = <1800>;
+	status = "ok";
+};
+
+&pcie1 {
+	status = "disabled";
+};
+
+&wlan_kiwi {
+	clocks = <&rpmhcc RPMH_RF_CLK1>;
+	clock-names = "rf_clk";
+};
+
+&tlmm {
+	wifi_ctrl_irq: wifi_ctrl_irq {
+		mux {
+			pins = "gpio46";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio46";
+			drive-strength = <2>;
+			bias-disable;
+			input-enable;
+		};
+	};
+};
+
+&soc {
+	xiaomi_wifi_gpio {
+		compatible = "xiaomi,xiaomi-wifi";
+		gpio = <&tlmm 46 0>;
+		debounce-time = <30>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&wifi_ctrl_irq>;
+		status = "ok";
+	};
 };
