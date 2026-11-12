@@ -1,3 +1,4 @@
+#include <dt-bindings/clock/qcom,rpmh.h>
 #include <dt-bindings/interconnect/qcom,pineapple.h>
 
 &tlmm {
@@ -187,4 +188,14 @@
 					    "non-fatal";
 		};
 	};
+};
+
+/*
+ * Xiaomi zorn: kiwi is clocked from RF_CLK1. This has to live in the
+ * wlan overlay that defines wlan_kiwi, the board overlay is merged
+ * before it and cannot resolve the label.
+ */
+&wlan_kiwi {
+	clocks = <&rpmhcc RPMH_RF_CLK1>;
+	clock-names = "rf_clk";
 };

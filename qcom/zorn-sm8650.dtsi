@@ -838,11 +838,6 @@
 	status = "disabled";
 };
 
-&wlan_kiwi {
-	clocks = <&rpmhcc RPMH_RF_CLK1>;
-	clock-names = "rf_clk";
-};
-
 &tlmm {
 	wifi_ctrl_irq: wifi_ctrl_irq {
 		mux {
