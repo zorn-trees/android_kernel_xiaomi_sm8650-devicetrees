@@ -400,7 +400,7 @@
 };
 
 &adsp_slpi_mem {
-        reg = <0x0 0x9df00000 0x0 0x4280000>;
+        reg = <0x0 0x9df00000 0x0 0x4680000>;
 };
 
 &qupv3_se6_spi {
