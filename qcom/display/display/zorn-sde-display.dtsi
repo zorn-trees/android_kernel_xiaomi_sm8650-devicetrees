@@ -116,6 +116,7 @@
 &soc {
 	charge_screen: charge-screen {
 		panel  = <&dsi_o11_42_02_0a_dsc_cmd
+			&dsi_o11_42_02_0b_dsc_cmd
 			&dsi_r66451_amoled_video>;
 	};
 };
@@ -128,6 +129,7 @@
 	};
 	fingerprint_screen: fingerprint-screen {
 		panel = <&dsi_o11_42_02_0a_dsc_cmd
+			&dsi_o11_42_02_0b_dsc_cmd
 			&dsi_r66451_amoled_video>;
 	};
 };
