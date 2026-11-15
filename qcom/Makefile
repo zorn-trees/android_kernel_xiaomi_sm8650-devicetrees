@@ -30,7 +30,8 @@ PINEAPPLE_BOARDS += \
 		 pineapple-dpm-overlay.dtbo \
 		 pineapplep-aim500-overlay.dtbo \
 		 pineapplep-aim500-v2-overlay.dtbo \
-		 aurora-sm8650-overlay.dtbo
+		 aurora-sm8650-overlay.dtbo \
+		 zorn-sm8650-overlay.dtbo
 
 
 pineapple-dtb-$(CONFIG_ARCH_PINEAPPLE) += \
@@ -108,6 +109,15 @@ XIAOMI_PINEAPPLE_BOARDS += \
 aurora-overlays-dtb-$(CONFIG_ARCH_PINEAPPLE) += $(XIAOMI_PINEAPPLE_BOARDS) $(PINEAPPLE_BASE_DTB) $(PINEAPPLE_APQ_BASE_DTB)
 
 dtb-y += $(aurora-overlays-dtb-y)
+else ifeq ($(CONFIG_TARGET_PRODUCT_ZORN), y)
+PINEAPPLE_BASE_DTB += pineapple.dtb pineapple-v2.dtb
+PINEAPPLE_APQ_BASE_DTB += pineapplep.dtb pineapplep-v2.dtb pineapplep-sg-v2.dtb pineappleq-v2.dtb pineapplep-qcs.dtb
+XIAOMI_PINEAPPLE_BOARDS += \
+		 zorn-sm8650-overlay.dtbo
+
+zorn-overlays-dtb-$(CONFIG_ARCH_PINEAPPLE) += $(XIAOMI_PINEAPPLE_BOARDS) $(PINEAPPLE_BASE_DTB) $(PINEAPPLE_APQ_BASE_DTB)
+
+dtb-y += $(zorn-overlays-dtb-y)
 else
 CLIFFS_BASE_DTB += cliffs.dtb cliffs7.dtb
 XIAOMI_CLIFFS_BOARDS += \
